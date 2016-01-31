@@ -3289,7 +3289,7 @@ public class Vala.GirParser : CodeVisitor {
 
 	void parse_union () {
 		start_element ("union");
-		push_node (element_get_name (), true);
+		push_node (element_get_name () ?? "nameless_union", true);
 
 		Struct st;
 		if (current.new_symbol) {
