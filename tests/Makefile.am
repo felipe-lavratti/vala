@@ -214,7 +214,9 @@ TESTS = \
 	$(NULL)
 
 check-TESTS: $(TESTS)
-	@EXEEXT=$(EXEEXT) EXEEXT=$(EXEEXT) CFLAGS='$(CFLAGS)' CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' $(srcdir)/testrunner.sh $(TESTS)
+	for f in $(filter %.test %.vala,$^); do \
+		EXEEXT=$(EXEEXT) CFLAGS='$(CFLAGS)' CPPFLAGS='$(CPPFLAGS)' LDFLAGS='$(LDFLAGS)' $(srcdir)/testrunner.sh $$f || exit 1; \
+	done
 
 EXTRA_DIST = \
 	testrunner.sh \

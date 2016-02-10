@@ -207,7 +207,9 @@ cat << "EOF" >> main.vala
 }
 EOF
 
-cat $SOURCEFILES >> main.vala
+if [ -n "$SOURCEFILES" ]; then
+	cat $SOURCEFILES >> main.vala
+fi
 
 if $VALAC $VALAFLAGS -o test$EXEEXT $([ -z "$PACKAGES" ] || echo $PACKAGES | xargs -n 1 echo -n " --pkg") main.vala &>log; then
 	echo -e "\033[0;32mOK\033[m"
